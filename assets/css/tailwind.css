@@ -29,6 +29,10 @@
 } */
 
 @layer base {
+    * {
+      outline: none;
+    }
+    
     html {
         font-family: "Poppins";
         scroll-behavior: smooth;
@@ -154,5 +158,9 @@
         font-family: "Poppins", sans-serif;
         font-weight: 900;
         font-style: italic;
+      }
+
+      .avatar {
+        @apply rounded-full bg-[#3A3B3F] w-12 h-12 object-cover object-center aspect-square;
       }
 }

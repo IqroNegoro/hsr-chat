@@ -3,7 +3,7 @@ export const getAvatar = (url : string) => `https://raw.githubusercontent.com/Ma
 export const getCharacters = async () => await useFetch("https://raw.githubusercontent.com/Mar-7th/StarRailRes/master/index_new/en/characters.json", {
     default: () => [],
     transform: (res : string) => {
-        const result : Characters[] = [];
+        const result : Character[] = [];
         const characters = JSON.parse(res);
 
         for (const character in characters) {
