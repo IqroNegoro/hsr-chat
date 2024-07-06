@@ -7,7 +7,7 @@
                     <i class="bx bx-trash"></i>
                 </button>
                 <p v-if="message.type == 'text'" class="rounded-md rounded-tl-none px-4 pt-1 pb-2 shadow-[0px_1px_2px_0_rgba(0,0,0,0.25)] bg-[#eec988] font-medium text-md"> {{ message.text }} </p>
-                <img v-else :src="message.text" alt="Trailblazer" class="w-1/2 rounded-md">
+                <img v-else :src="message.text" alt="Trailblazer" class="w-1/2 rounded-md aspect-square object-center object-cover">
             </div>
         </div>
         <img src="/images/trash.webp" alt="Trailblazer" class="avatar">
