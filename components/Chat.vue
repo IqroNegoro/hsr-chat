@@ -1,7 +1,7 @@
 <template>
-    <div class="bg-[#D8D9DD] h-full w-full max-lg:top-0 max-lg:left-0 max-lg:fixed flex flex-col lg:rounded-tr-3xl relative max-lg:before:hidden before:absolute before:content-[''] before:w-full before:h-full before:top-1 before:-left-1 before:border before:border-white/50 before:rounded-tr-3xl before:-z-10">
+    <div class="bg-[#D8D9DD] h-full w-full max-md:top-0 max-md:left-0 max-md:fixed flex flex-col md:rounded-tr-3xl relative max-md:before:hidden before:absolute before:content-[''] before:w-full before:h-full before:top-1 before:-left-1 before:border before:border-white/50 before:rounded-tr-3xl before:-z-10">
         <div class="flex items-center gap-2 shadow-[0_1px_0_0_rgba(0,0,0,0.1)] px-5 pt-3 pb-5">
-            <button class="flex justify-center items-center lg:hidden" @click="$emit('close')">
+            <button class="flex justify-center items-center md:hidden" @click="$emit('close')">
                 <i class="bx bx-chevron-left text-2xl"></i>
             </button>
             <p class="poppins-medium">{{ character.name }}</p>
@@ -12,7 +12,7 @@
                 <CharacterMessage v-else :character="character" :message="chat" @delete-message="handleDeleteMessage" />
             </template>
         </div>
-        <div class="flex justify-center items-center px-4 lg:px-12 py-2 gap-4 lg:gap-8">
+        <div class="flex justify-center items-center px-4 md:px-12 py-2 gap-4 md:gap-8">
             <button class="aspect-square h-full" @click="isTrailblazer = false">
                 <img :src="character.icon" :alt="character.name" class="avatar" :class="{'grayscale': isTrailblazer}">
             </button>
