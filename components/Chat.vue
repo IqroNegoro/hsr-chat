@@ -6,7 +6,7 @@
             </button>
             <p class="poppins-medium">{{ character.name }}</p>
         </div>
-        <div class="px-8 py-2 w-full h-full overflow-y-auto overflow-x-hidden flex flex-col gap-4">
+        <div class="px-8 py-2 w-full h-full overflow-y-auto overflow-x-hidden flex flex-col gap-4" ref="container">
             <template v-for="chat in chats" :key="chat.id">
                 <TrailblazerMessage v-if="chat.isTrailblazer" :message="chat" @delete-message="handleDeleteMessage" />
                 <CharacterMessage v-else :character="character" :message="chat" @delete-message="handleDeleteMessage" />
@@ -17,12 +17,20 @@
                 <img :src="character.icon" :alt="character.name" class="avatar" :class="{'grayscale': isTrailblazer}">
             </button>
             <div class="flex justify-center items-center gap-2 relative w-full bg-black/10 p-2 rounded-md">
+                <div class="absolute bottom-[110%] rounded-md left-0 bg-white/50 backdrop-blur-sm w-full h-96 overflow-y-auto grid grid-cols-4 grid-flow-row gap-2" v-show="showSticker">
+                    <button v-for="i in 224" :key="i" @click="handleSendImage(`https://hsrchat.pages.dev/assets/img/stickers/sticker_${i - 1}.png`)">
+                        <img :src="`https://hsrchat.pages.dev/assets/img/stickers/sticker_${i - 1}.png`" alt="">
+                    </button>
+                </div>
                 <input type="text" class="w-full bg-transparent" v-model="message" @keydown.enter="sendMessage">
-                <label for="imageInput" class="cursor-pointer">
+                <button class="flex justify-center items-center" @click="showSticker = !showSticker">
+                    <i class="bx bxs-sticker"></i>
+                </button>
+                <label for="imageInput" class="cursor-pointer flex justify-center items-center">
                     <i class="bx bxs-camera hover:text-[#CC833E] text-xl"></i>
                 </label>
                 <input type="file" class="hidden" id="imageInput" @change="handleSendImage" accept=".jpeg,.jpg,.png,.webp">
-                <button @click="sendMessage">
+                <button class="flex justify-center items-center" @click="sendMessage">
                     <i class="bx bxs-send hover:text-[#CC833E] text-xl"></i>
                 </button>
             </div>
@@ -42,8 +50,22 @@ const isTrailblazer : Ref<boolean> = ref(false);
 const allChats : Ref<Chat> = ref({})
 
 const chats : Ref<Message[]> = ref([]);
+const showSticker : Ref<boolean> = ref(false);
 
 const message : Ref<string> = ref("");
+
+const container : Ref<HTMLDivElement | undefined> = ref(undefined);
+
+watch(chats, async (val, old) => {
+    await nextTick();
+    if (val.length > old.length) {
+        container.value!.scrollTop = container.value!.scrollHeight
+    }
+});
+
+onMounted(() => {
+    container.value!.scrollTop = container.value!.scrollHeight;
+});
 
 if (import.meta.client) {
     allChats.value = JSON.parse(localStorage.getItem("chats")!);
@@ -58,12 +80,12 @@ const saveChat = () => localStorage.setItem("chats", JSON.stringify(allChats.val
 
 const sendMessage = () => {
     if (!message.value) return;
-    chats.value.push({
+    chats.value = [...chats.value, {
         id: +new Date(),
         text: message.value,
         type: "text",
         isTrailblazer: isTrailblazer.value
-    });
+    }];
     saveChat();
     message.value = "";
 };
@@ -82,15 +104,15 @@ const handleSendImage = async (v : any) => {
         image = v;
     }
 
-    chats.value.push({
+    chats.value = [...chats.value, {
         id: +new Date(),
         text: image,
         type: "image",
         isTrailblazer: isTrailblazer.value
-    });
+    }];
 
     saveChat();
-
+    showSticker.value = false;
     if (typeof v === 'object') v.value = "";
 }
 </script>
