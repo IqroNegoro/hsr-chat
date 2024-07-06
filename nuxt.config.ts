@@ -2,11 +2,12 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ["@nuxtjs/tailwindcss"],
-
+  runtimeConfig: {
+    COUNTER_KEY: process.env.COUNTER_KEY
+  },
   tailwindcss: {
     cssPath: '~/assets/css/tailwind.css'
   },
-
   app: {
     head: {
       link: [
@@ -25,7 +26,7 @@ export default defineNuxtConfig({
         },
         {
           name: "description",
-          content: "Create your own custom momotalk chat with Honkai Star Rail character!"
+          content: "Create your own custom chat with Honkai Star Rail character!"
         },
         {
           name: "keywords",
@@ -33,7 +34,7 @@ export default defineNuxtConfig({
         },
         {
           property: "og:description",
-          content: "Create your own custom momotalk chat with your lovely student!"
+          content: "Create your own custom chat with Honkai Star Rail character!"
         },
         {
           property: "og:site:name",
@@ -45,7 +46,7 @@ export default defineNuxtConfig({
         },
         {
           property: "og:url",
-          content: "https://momotalk.netlify.app/"
+          content: "https://starrail.netlify.app/"
         },
         { 
           property: 'og:type', 

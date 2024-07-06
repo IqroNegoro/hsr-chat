@@ -15,4 +15,9 @@ if (import.meta.client) {
     localStorage.setItem("chats", JSON.stringify({}));
   }
 }
+
+const {data: counter} = await useFetch("/api/counter", {
+  default: () => {},
+  key: "get-counter"
+});
 </script>
