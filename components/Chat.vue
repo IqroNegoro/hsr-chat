@@ -57,6 +57,7 @@ if (import.meta.client) {
 const saveChat = () => localStorage.setItem("chats", JSON.stringify(allChats.value));
 
 const sendMessage = () => {
+    if (!message.value) return;
     chats.value.push({
         id: +new Date(),
         text: message.value,
