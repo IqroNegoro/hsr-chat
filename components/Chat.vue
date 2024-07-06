@@ -86,6 +86,7 @@ const sendMessage = () => {
         type: "text",
         isTrailblazer: isTrailblazer.value
     }];
+    allChats.value[props.character.id] = chats.value
     saveChat();
     message.value = "";
 };
@@ -109,8 +110,8 @@ const handleSendImage = async (v : any) => {
         text: image,
         type: "image",
         isTrailblazer: isTrailblazer.value
-    }];
-
+    }];console.log(chats.value)
+    allChats.value[props.character.id] = chats.value
     saveChat();
     showSticker.value = false;
     if (typeof v === 'object') v.value = "";
