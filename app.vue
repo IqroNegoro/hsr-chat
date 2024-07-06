@@ -25,6 +25,5 @@ if (process.env.NODE_ENV === 'production') {
     default: () => {},
     key: "get-counter"
   });
-  console.log(counter.value)
 }
 </script>
