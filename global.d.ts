@@ -10,7 +10,7 @@ declare global {
         id: number,
         text: string,
         isTrailblazer: boolean,
-        type: "image" | "text"
+        type: "text" | "image"
     }
 
     interface Chat {
